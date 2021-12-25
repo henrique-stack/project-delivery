@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  database_estudos_prisma.io:
+    image: postgres
+    container_name: database_deliveryman
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=deliveryman_db
+    volumes:
+     - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
