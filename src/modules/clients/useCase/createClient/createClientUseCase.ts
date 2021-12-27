@@ -6,7 +6,7 @@ interface IcreateClient {
     password: string;
 }
 
-class CreateClientUseCase {
+export class CreateClientUseCase {
     async execute({ username, password }: IcreateClient ) {
         //@ts-ignore
         const clientExist = await prisma.clients.findFirst({
@@ -16,8 +16,9 @@ class CreateClientUseCase {
                 }
             }
         })
+
         if(clientExist) {
-            throw new Error("User already exists")
+            throw new Error("User already exists!")
         }
 
         const hashPassword = await hash(password, 10);
@@ -28,7 +29,6 @@ class CreateClientUseCase {
                 password: hashPassword
             }
         })
-        return client;
+        return client;  
     }
 }
-export { CreateClientUseCase }
