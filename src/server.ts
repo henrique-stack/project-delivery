@@ -1,9 +1,8 @@
-import 'express-async-errors';
 import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
 import { router } from './router';
 const app = express();
 app.use(express.json());
-
 app.use(router);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
@@ -14,9 +13,9 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
     };
 
     return response.status(500).json({
-        status: "error",
-        message: "internal server errors"
-    });
+         status: 'Internal server error',
+         error: next(err)
+})
 });
 
 app.listen(8080, () =>  console.log('server running!'));

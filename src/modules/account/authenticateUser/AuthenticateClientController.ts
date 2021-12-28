@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthenticateClientUseCase } from './AuthenticateClientUseCase';
 
-class AuthenticateClientController {
+export class AuthenticateClientController {
     async handle(request: Request, response: Response) {
         const { username, password } = request.body;
 
@@ -11,7 +11,5 @@ class AuthenticateClientController {
             password
         });
         return response.json(result);
-    }
-}
-
-export { AuthenticateClientController }
+    };
+};

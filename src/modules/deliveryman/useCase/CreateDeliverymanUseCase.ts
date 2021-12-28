@@ -17,11 +17,11 @@ export class CreateDeliverymanUseCase {
         })
 
         if(deliverymanExist) {
-            throw new Error("Deliveryman already exists!")
+            throw new Error("Deliveryman already going!")
         }
         const hashPassword = await hash(password, 10);
 
-        const deliveryman = await prisma.clients.create({
+        const deliveryman = await prisma.deliveryman.create({
             data: {
                 username,
                 password: hashPassword
