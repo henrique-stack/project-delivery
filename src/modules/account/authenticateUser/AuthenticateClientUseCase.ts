@@ -8,14 +8,14 @@ interface IAuthenticate {
 
 export class AuthenticateClientUseCase {
     async execute({ username, password }: IAuthenticate) {
-        const createClient = await prisma.client.findFirst({
+        const createClient = await prisma.clients.findFirst({
             where: {
                 username
             }
         });
         
         if(!createClient) {
-            throw new Error("password or username invalid!");
+            throw new Error("username invalid!");
         }
 
         const MatchPassword = await compare(password, createClient.password);
@@ -28,6 +28,7 @@ export class AuthenticateClientUseCase {
            subject: createClient.id,
            expiresIn: "1d"
         });
+        
         return token;
     }
 }

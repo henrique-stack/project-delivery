@@ -8,7 +8,6 @@
             "type": "node",
             "request": "attach",
             "name": "Deliveryman Debug",
-            "processId":"${command:PickProcess}"
         }
     ]
 }

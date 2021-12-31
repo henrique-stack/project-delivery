@@ -11,14 +11,16 @@ export class CreateDeliverymanUseCase {
         const deliverymanExist = await prisma.deliveryman.findFirst({
             where: {
                 username: {
+                    equals: username,
                     mode: "insensitive"
                 }
             }
-        })
+        });
 
         if(deliverymanExist) {
-            throw new Error("Deliveryman already going!")
+            throw new Error("Deliveryman already signed!")
         }
+        
         const hashPassword = await hash(password, 10);
 
         const deliveryman = await prisma.deliveryman.create({

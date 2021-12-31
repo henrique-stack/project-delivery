@@ -27,7 +27,9 @@ model Clients {
   Deliveries Deliveries[]
   @@map("clients")
 }
-
+//aqui estamos relacionando as tabelas, deliveryman e clients.
+//  onde estamos referenciando o id da tabela deliveries, para que a tabela
+// deliveries tenha acesso ao id da tabela client 
 model Deliveries {
   id        String  @id @default(uuid())
   id_client String
@@ -35,7 +37,7 @@ model Deliveries {
 
   id_deliveryman String?
   deliveryman Deliveryman? @relation(fields: [id_deliveryman], references: [id])
-  item_name   String?
+  item_name   String
   created_at  DateTime    @default(now())
   end_at      DateTime?
 

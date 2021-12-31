@@ -9,7 +9,7 @@ export class CreateDeliveryController {
         
         const createDeliveryUseCase = new CreateDeliveryUseCase();
 
-        const delivery = createDeliveryUseCase.execute({
+        const delivery = await createDeliveryUseCase.execute({
             item_name,
             id_client
         });

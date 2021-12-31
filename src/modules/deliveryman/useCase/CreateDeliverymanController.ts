@@ -13,4 +13,4 @@ export class CreateDeliverymanController {
         });
         return response.json(result);
     };
-    }
+  }

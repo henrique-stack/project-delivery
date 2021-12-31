@@ -13,6 +13,6 @@ export class CreateDeliveryUseCase {
                 item_name
             }
         })
-        return delivery ;
+        return delivery;
     }
 };
