@@ -8,19 +8,24 @@ import { FindAllDeliveriesController } from './modules/clients/useCases/findAllD
 import { CreateDeliveryController } from './modules/deliveries/useCases/createDelivery/CreateDeliveryController';
 import { FindAllAvailableController } from './modules/deliveries/useCases/findAvailable/FindAllAvailableController';
 import { UpdateDeliverymanController } from './modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanController';
-import { CreateDeliverymanController } from './modules/deliveryman/useCase/CreateDeliverymanController';
+import { CreateDeliverymanController } from './modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController';
+import { FindAllDeliveriesDeliverymanController } from './modules/deliveryman/useCases/findAllDeliveries/FindAllDeliveriesController';
+import { UpdateEndDateController } from './modules/deliveries/useCases/updateEndDate/UpdateEndDateController';
 
 const router = Router();
 
-const createDelivery = new CreateDeliveryController();
 const authenticateClient = new AuthenticateClientController();
 const authenticateDeliveryman = new AuthenticateDeliverymanController();
-const createDeliveryman = new CreateDeliverymanController();
-const updateDeliveryman = new UpdateDeliverymanController();
-const findAllDeliveries = new FindAllDeliveriesController();
 
-const findAllAvailableDeliveries = new FindAllAvailableController();
+const createDelivery = new CreateDeliveryController();
+const createDeliveryman = new CreateDeliverymanController();
 const createClient = new CreateClientController();
+const updateDeliveryman = new UpdateDeliverymanController();
+const updateEndDateController = new UpdateEndDateController();
+
+const findAllDeliveriesDeliveryman = new FindAllDeliveriesDeliverymanController(); 
+const findAllAvailableDeliveries = new FindAllAvailableController();
+const findAllDeliveries = new FindAllDeliveriesController();
 
 router.post('/deliveryman', createDeliveryman.handle);  
 router.post('/client/', createClient.handle);
@@ -40,8 +45,16 @@ router.get('/client/deliveries',
 ensureAuthenticateClient,
 findAllDeliveries.handle)
 
+router.get('/deliveryman/deliveries',
+ensureAuthenticateDeliveryman, 
+findAllDeliveriesDeliveryman.handle)
+
 router.get('/delivery/available',
  ensureAuthenticateDeliveryman,
  findAllAvailableDeliveries.handle)
+
+router.put('/delivery/updateEndDate/:id',
+ensureAuthenticateDeliveryman,
+updateEndDateController.handle)
 
 export { router }
